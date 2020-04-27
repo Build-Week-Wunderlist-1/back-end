@@ -16,6 +16,7 @@ router.post('/register', (req, res) => {
       res.status(201).json(saved);
     })
     .catch(error => {
+      console.log('Register error', error);
       res.status(500).json({errorMessage: "Couldn't register new user, contact backend"});
     });
 });
@@ -33,6 +34,7 @@ router.post('/login', (req, res) => {
         // send the token to the client
         res.status(200).json({
           message: `Welcome ${user.username}, you got a token`,
+          userId: user.id,
           token
         });
       } else {

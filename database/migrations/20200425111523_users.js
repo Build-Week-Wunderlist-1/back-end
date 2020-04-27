@@ -11,10 +11,32 @@ exports.up = function(knex) {
         .unique();  
       users.string('password', 128)
         .notNullable();
-    
-    });
+      
+        
+      })
+      .createTable('todo', task => {
+        task.increments();
+        task.string('taskName')
+          .notNullable()
+        task.string('taskDescription')
+          .notNullable()  
+        task.date('date')  
+        task.boolean('completed')
+          .defaultTo(false);
+      })
+      .createTable('user_todo', el => {
+        el.increments()
+        el.int('userId')
+        .notNullable()
+        .references('id').inTable('users')
+        el.int('listId')
+        .notNullable()
+        .references('id').inTable('todo');
+      });    
   };
   
   exports.down = function(knex, Promise) {
-    return knex.schema.dropTableIfExists('users');
+    return knex.schema.dropTableIfExists('user_todo')
+    .dropTableIfExists('todo')
+    .dropTableIfExists('users')
   };
