@@ -16,7 +16,7 @@ server.use('/api/users', authentication, usersRouter);
 server.use('/api/lists', authentication, listsRouter);
 
 server.get('/', (req, res) => {
-    res.json({Message: "The API is up!"});
+  res.json({ Message: 'The API is up!' });
 });
 
 module.exports = server;
