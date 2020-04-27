@@ -26,10 +26,10 @@ exports.up = function(knex) {
       })
       .createTable('user_todo', el => {
         el.increments()
-        el.int('userId')
+        el.integer('userId')
         .notNullable()
         .references('id').inTable('users')
-        el.int('listId')
+        el.integer('listId')
         .notNullable()
         .references('id').inTable('todo');
       });    
