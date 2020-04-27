@@ -15,9 +15,18 @@ router.get('/', (req, res) => {
 
 router.get('/:id', authentication, (req, res) => {
 
-  // find the user by id, then do another findByFilter and use the user id as  the filter. 
-  const id = req.params.id;
-  Lists.findBy({userId: id})
+  // How to authenticate userId?
+  // try asking the front-end to send a userId with the get request if they want access to a list. 
+  const paramsId = req.params.id;
+  const bodyId = req.body.userId;
+
+  if (paramsId === bodyId) {
+    // respond with the list filtered by {userId: bodyId}
+  } else {
+    // respond with "Access denied"
+  }
+
+  Lists.findBy({userId: paramsId})
     .then(lists => {
       res.json(lists);
     })
