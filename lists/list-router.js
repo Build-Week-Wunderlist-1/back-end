@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     .catch(err => res.json(err));
 });
 
-router.get('/:id', authentication, (req, res) => {
+router.get('/:id', (req, res) => {
 
   // How to authenticate userId?
   // try asking the front-end to send a userId with the get request if they want access to a list. 
@@ -25,13 +25,13 @@ router.get('/:id', authentication, (req, res) => {
   } else {
     // respond with "Access denied"
   }
-
   Lists.findBy({userId: paramsId})
     .then(lists => {
       res.json(lists);
     })
     .catch(err => res.json(err));
 });
+
 
 module.exports = router;
 
