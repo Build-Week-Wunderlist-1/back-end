@@ -72,5 +72,3 @@ router.delete('/:id/:todoId', (req, res) => {
 });
 
 module.exports = router;
-
-module.exports = router;
