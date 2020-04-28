@@ -39,7 +39,7 @@ router.post('/login', (req, res) => {
         });
       } else {
         res.status(401).json({
-          message: 'Invalid Credentials, you have a messed up token',
+          message: 'Invalid Credentials, you have a messed up password',
         });
       }
     })
