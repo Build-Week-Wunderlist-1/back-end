@@ -5,7 +5,10 @@ module.exports = {
   find,
   findBy,
   findById,
-  editList,
+  addTask,
+  addTaskToUser,
+  updateTask,
+  deleteTask,
 };
 
 function find() {
@@ -31,35 +34,28 @@ async function add(user) {
 }
 
 function findById(id) {
-  return db('user_todo')
+  return db('todo')
     .where({ id })
     .first();
 }
 
-function editList () {
+async function addTask(task) {
+  const [id] = 
+  await db('todo').insert(task);
+  console.log("addTask id ", id);
+
+  return findById(id);
 }
 
+function addTaskToUser(id1, id2) {
+  return db('user_todo').insert({ userId: id1, listId: id2 });
+}
 
+async function updateTask(task, id) {
+  await db('todo').update(task).where({ id });
+  return findById(id);
+}
 
-// function getTasks(id) {
-//   return db('tasks')
-//     .select(
-//       'tasks.id',
-//       'tasks.description as task_description',
-//       'tasks.notes as task_notes',
-//       'tasks.completed',
-//       'projects.project_name',
-//       'projects.description as project_description'
-//     )
-//     .join('projects', 'tasks.project_id', '=', 'projects.id')
-//     .where({ project_id: id });
-// }
-
-
-// knex ex
-
-// knex('users')
-//   .join('contacts', 'users.id', '=', 'contacts.user_id')
-//   .select('users.id', 'contacts.phone')
-// Outputs:
-// select "users"."id", "contacts"."phone" from "users" inner join "contacts" on "users"."id" = "contacts"."user_id"
+function deleteTask(id) {
+  return db('todo').where({ id }).del();
+}
