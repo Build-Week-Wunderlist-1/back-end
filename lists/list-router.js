@@ -52,20 +52,28 @@ router.post('/:id', (req, res) => {
 
 router.put('/:id/:todoId', (req, res) => {
   const id = req.params.todoId;
-  const updatedTask = req.body;
+  const task = req.body;
 
-  Lists.findTodoById(id).then((todo) => {
-    console.log(todo);
-    Lists.updateTask(updatedTask)
-      .then((response) => {
-        res.status(200).json({ message: response });
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  });
+  Lists.updateTask(task, id)
+    .then((response) => {
+      // returns the updated task in the message
+      res.status(200).json({ message: response });
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
 });
 
-router.delete('/:id', (req, res) => {});
+router.delete('/:id/:todoId', (req, res) => {
+  const id = req.params.todoId;
+
+  Lists.deleteTask(id)
+    .then(() => {
+      res.status(200).json({ message: 'Successfully deleted the task.' });
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
 
 module.exports = router;

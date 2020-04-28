@@ -16,8 +16,16 @@ exports.up = function (knex) {
     })
     .createTable('user_todo', (el) => {
       el.increments();
-      el.integer('userId').notNullable().references('id').inTable('users');
-      el.integer('listId').notNullable().references('id').inTable('todo');
+      el.integer('userId')
+        .notNullable()
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE');
+      el.integer('listId')
+        .notNullable()
+        .references('id')
+        .inTable('todo')
+        .onDelete('CASCADE');
     });
 };
 

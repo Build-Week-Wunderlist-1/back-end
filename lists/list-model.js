@@ -5,10 +5,9 @@ module.exports = {
   findBy,
   findById,
   addTask,
+  addTaskToUser,
   updateTask,
   deleteTask,
-  addTaskToUser,
-  findTodoById,
 };
 
 function find() {
@@ -58,12 +57,11 @@ function addTaskToUser(id1, id2) {
   return db('user_todo').insert({ userId: id1, listId: id2 });
 }
 
-function findTodoById(id) {
-  return db('todo').where({ id });
+async function updateTask(task, id) {
+  await db('todo').update(task).where({ id });
+  return findById(id);
 }
 
-function updateTask(task) {
-  return db('todo').update(task);
+function deleteTask(id) {
+  return db('todo').where({ id }).del();
 }
-
-function deleteTask() {}
