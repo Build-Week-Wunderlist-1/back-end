@@ -6,10 +6,10 @@ Base: https://lambdawunderlist.herokuapp.com/
 
 ### Auth Routes
 
-| Method | Type     | Endpoint                   | Send                                | Returns                                              |
-| ------ | -------- | -------------------------- | ----------------------------------- | ---------------------------------------------------- |
-| POST   | Register | /auth/register/`:userType` | See below                           | Message: `res.data`                                  |
-| POST   | Login    | /auth/login/`:userType`    | JSON with "username" and "password" | Message: `res.data.message`, Token: `res.data.token` |
+| Method | Type     | Endpoint                   | Send                                          | Returns                                              |
+| ------ | -------- | -------------------------- | -----------------------------------           | ---------------------------------------------------- |
+| POST   | Register | api/auth/register/         | See below                                     | Message: `res.data`                                  |
+| POST   | Login    | api/auth/login/            | JSON with "username", "email", and "password" | Message: `res.data.message`, Token: `res.data.token` |
 
 Registration info:
 
