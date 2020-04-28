@@ -21,7 +21,8 @@ exports.up = function(knex) {
         task.string('taskDescription')
           .notNullable();
         task.integer('sortField'); 
-        task.date('date');
+        task.timestamp('date')
+          .defaultTo(knex.fn.now());
         task.boolean('completed')
           .defaultTo(false);
       })

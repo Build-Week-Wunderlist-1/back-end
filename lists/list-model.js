@@ -19,7 +19,6 @@ function find() {
 }
 
 function findBy(filter) {
-  // return db('user_todo').where(filter);
   return db('user_todo')
     .select( "user_todo.id as user_todo_id", 'users.username', 'users.id as user_id', 'todo.taskName', 'todo.taskDescription', 'todo.date', 'todo.completed')
     .join('todo', 'user_todo.listId', '=', 'todo.id')
@@ -42,7 +41,6 @@ function findById(id) {
 async function addTask(task) {
   const [id] = 
   await db('todo').insert(task);
-  console.log("addTask id ", id);
 
   return findById(id);
 }
