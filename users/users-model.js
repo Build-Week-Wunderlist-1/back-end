@@ -21,4 +21,8 @@ function add(user) {
 
 function findById(id) {
   return db('users').where({ id }).first();
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 193949c0cbd8d67542196c4324fc63d53428b3e1
