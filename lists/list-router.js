@@ -25,7 +25,6 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/:id', (req, res) => {
-  console.log("post req.body = ", req.body);
   Lists.addTask(req.body)
     .then((task) => {
       const userId = req.params.id;
