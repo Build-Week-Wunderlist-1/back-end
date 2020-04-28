@@ -13,7 +13,14 @@ module.exports = {
 
 function find() {
     return db('user_todo')
-    .select( "user_todo.id as user_todo_id", 'users.username', 'users.id as user_id', 'todo.taskName', 'todo.taskDescription', 'todo.date', 'todo.completed')
+    .select( "user_todo.id as user_todo_id",
+     'users.username', 
+     'users.id as user_id',
+     'todo.taskName', 
+     'todo.id as todo_id',
+     'todo.taskDescription',
+     'todo.date',
+     'todo.completed')
     .join('todo', 'user_todo.listId', '=', 'todo.id')
     .join('users', 'user_todo.userId', '=', 'users.id');
 }
