@@ -28,7 +28,7 @@ _Token must be sent to access_
 | List   |                 | `:id` = userId             |                           |                         |
 | POST   | Add Task        | /api/lists/`:id`           | taskName, taskDescription | task added              |
 | PUT    | Update Task     | /api/lists/`:id`/`:todoId` | taskName, taskDescription | task updated            |
-| DELETE | Delete Task     | /api/lists/`:id`           |                           | Success or Fail Message |
+| DELETE | Delete Task     | /api/lists/`:id`/`:todoId` |                           | Success or Fail Message |
 | GET    | Read All Tasks  | /api/lists/`:id`/          |                           | Array with all tasks    |
 | GET    | Read Task by id | /api/lists/`:id`/`:todoId` |                           | Task by id              |
 
