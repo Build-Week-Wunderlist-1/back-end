@@ -5,42 +5,43 @@ const Lists = require('./list-model.js');
 // const Users = require('./user-model.js');
 
 router.get('/', (req, res) => {
-
   Lists.find()
-    .then(lists => {
+    .then((lists) => {
       res.json(lists);
     })
-    .catch(err => res.json(err));
+    .catch((err) => res.json(err));
 });
 
 router.get('/:id', (req, res) => {
-
   const paramsId = req.params.id;
 
-  Lists.findBy({userId: paramsId})
-    .then(lists => {
+  Lists.findBy({ userId: paramsId })
+    .then((lists) => {
       res.json(lists);
     })
-    .catch(err => res.json(err));
+    .catch((err) => res.json(err));
 });
 
 router.post('/:id', (req, res) => {
-  console.log("post req.body = ", req.body);
   Lists.addTask(req.body)
     .then((task) => {
-      const userId = req.params.id;
-      const listId = task.id;
+      const userId = Number(req.params.id);
+      const listId = task[0].id;
 
       Lists.addTaskToUser(userId, listId)
         .then(() => {
           res.status(201).json({ data: task });
         })
         .catch((err) => {
-          res.status(500).json({ error: "Can't add task to user_todo table"});
+          res.status(500).json({
+            error: "Can't add task to user_todo table",
+          });
         });
     })
     .catch((err) => {
-      res.status(500).json({ error: "Can't add the task to the todo table" });
+      res
+        .status(500)
+        .json({ error: "Can't add the task to the todo table" });
     });
 });
 
@@ -72,6 +73,4 @@ router.delete('/:id/:todoId', (req, res) => {
 
 module.exports = router;
 
-
 module.exports = router;
-

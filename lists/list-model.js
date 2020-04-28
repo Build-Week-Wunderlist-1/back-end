@@ -12,8 +12,16 @@ module.exports = {
 };
 
 function find() {
-    return db('user_todo')
-    .select( "user_todo.id as user_todo_id", 'users.username', 'users.id as user_id', 'todo.taskName', 'todo.taskDescription', 'todo.date', 'todo.completed')
+  return db('user_todo')
+    .select(
+      'user_todo.id as user_todo_id',
+      'users.username',
+      'users.id as user_id',
+      'todo.taskName',
+      'todo.taskDescription',
+      'todo.date',
+      'todo.completed'
+    )
     .join('todo', 'user_todo.listId', '=', 'todo.id')
     .join('users', 'user_todo.userId', '=', 'users.id');
 }
@@ -21,7 +29,15 @@ function find() {
 function findBy(filter) {
   // return db('user_todo').where(filter);
   return db('user_todo')
-    .select( "user_todo.id as user_todo_id", 'users.username', 'users.id as user_id', 'todo.taskName', 'todo.taskDescription', 'todo.date', 'todo.completed')
+    .select(
+      'user_todo.id as user_todo_id',
+      'users.username',
+      'users.id as user_id',
+      'todo.taskName',
+      'todo.taskDescription',
+      'todo.date',
+      'todo.completed'
+    )
     .join('todo', 'user_todo.listId', '=', 'todo.id')
     .join('users', 'user_todo.userId', '=', 'users.id')
     .where(filter);
@@ -34,17 +50,11 @@ async function add(user) {
 }
 
 function findById(id) {
-  return db('todo')
-    .where({ id })
-    .first();
+  return db('todo').where({ id }).first();
 }
 
-async function addTask(task) {
-  const [id] = 
-  await db('todo').insert(task);
-  console.log("addTask id ", id);
-
-  return findById(id);
+function addTask(task) {
+  return db('todo').insert(task).returning('*');
 }
 
 function addTaskToUser(id1, id2) {

@@ -1,47 +1,40 @@
-exports.up = function(knex) {
-    return knex.schema.createTable('users', users => {
+exports.up = function (knex) {
+  return knex.schema
+    .createTable('users', (users) => {
       users.increments();
-  
-      users
-        .string('username', 128)
+
+      users.string('username', 128).notNullable().unique();
+      users.string('email', 255).notNullable().unique();
+      users.string('password', 128).notNullable();
+    })
+    .createTable('todo', (task) => {
+      task.increments();
+      task.string('taskName').notNullable();
+      task.string('taskDescription').notNullable();
+      task.integer('sortField');
+      task.timestamp('date').defaultTo(knex.fn.now());
+      task.boolean('completed').defaultTo(false);
+    })
+    .createTable('user_todo', (el) => {
+      el.increments();
+      el.integer('userId')
         .notNullable()
-        .unique();
-      users.string('email', 255)
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE');
+      el.integer('listId')
         .notNullable()
-        .unique();  
-      users.string('password', 128)
-        .notNullable();
-      
-        
-      })
-      .createTable('todo', task => {
-        task.increments();
-        task.string('taskName')
-          .notNullable();
-        task.string('taskDescription')
-          .notNullable();
-        task.integer('sortField'); 
-        task.date('date');
-        task.boolean('completed')
-          .defaultTo(false);
-      })
-      .createTable('user_todo', el => {
-        el.increments();
-        el.integer('userId')
-        .notNullable()
-        .references('id').inTable('users')
-        .onDelete("CASCADE")
-        .onUpdate("CASCADE");
-        el.integer('listId')
-        .notNullable()
-        .references('id').inTable('todo')
-        .onDelete("CASCADE")
-        .onUpdate("CASCADE");
-      });    
-  };
-  
-  exports.down = function(knex, Promise) {
-    return knex.schema.dropTableIfExists('user_todo')
+        .references('id')
+        .inTable('todo')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE');
+    });
+};
+
+exports.down = function (knex, Promise) {
+  return knex.schema
+    .dropTableIfExists('user_todo')
     .dropTableIfExists('todo')
-    .dropTableIfExists('users')
-  };
+    .dropTableIfExists('users');
+};
