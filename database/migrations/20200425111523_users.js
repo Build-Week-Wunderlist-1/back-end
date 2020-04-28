@@ -17,21 +17,26 @@ exports.up = function(knex) {
       .createTable('todo', task => {
         task.increments();
         task.string('taskName')
-          .notNullable()
+          .notNullable();
         task.string('taskDescription')
-          .notNullable()  
-        task.date('date')  
+          .notNullable();
+        task.integer('sortField'); 
+        task.date('date');
         task.boolean('completed')
           .defaultTo(false);
       })
       .createTable('user_todo', el => {
-        el.increments()
+        el.increments();
         el.integer('userId')
         .notNullable()
         .references('id').inTable('users')
+        .onDelete("CASCADE")
+        .onUpdate("CASCADE");
         el.integer('listId')
         .notNullable()
-        .references('id').inTable('todo');
+        .references('id').inTable('todo')
+        .onDelete("CASCADE")
+        .onUpdate("CASCADE");
       });    
   };
   
