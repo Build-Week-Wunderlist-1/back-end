@@ -11,7 +11,7 @@ Base: https://lambdawunderlist.herokuapp.com/
 | ------ | -------- | ------------------ | --------------------------------------------- | ---------------------------------------------------- |
 | POST   | Register | api/auth/register/ | See below                                     | Message: `res.data`                                  |
 | POST   | Login    | api/auth/login/    | JSON with "username", "email", and "password" | Message: `res.data.message`, Token: `res.data.token` |
-=======
+
 | Method | Type     | Endpoint                   | Send                                          | Returns                                              |
 | ------ | -------- | -------------------------- | -----------------------------------           | ---------------------------------------------------- |
 | POST   | Register | api/auth/register/         | See below                                     | Message: `res.data`                                  |
@@ -47,7 +47,7 @@ TASKS
 | DELETE | Delete Task | /api/lists/`:id`/`:todoId` | | Success or Fail Message |
 | GET | Read All Tasks | /api/lists/ | | Array with all tasks |
 | GET | Read Task by id | /api/lists/`:id`/ | | Task by id |
-=======
+
 | Method | Type             | Endpoint                   | Send                      | Returns                 |
 | ------ | ---------------  | -------------------------- | ------------------------- | ----------------------- |
 | List   |                  | `:id` = userId             |                           |                         |
