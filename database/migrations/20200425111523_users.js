@@ -13,6 +13,7 @@ exports.up = function (knex) {
       task.string('taskDescription').notNullable();
       task.integer('sortField').defaultTo(1);
       task.timestamp('date').defaultTo(knex.fn.now());
+      task.date('creationDate');
       task.boolean('completed').defaultTo(false);
     })
     .createTable('user_todo', (el) => {
