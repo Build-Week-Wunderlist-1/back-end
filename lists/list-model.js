@@ -30,6 +30,7 @@ function find() {
 }
 
 function findBy(filter) {
+  // return db('user_todo').where(filter);
   return db('user_todo')
     .select(
       'user_todo.id as user_todo_id',
