@@ -1,6 +1,6 @@
 exports.up = function(knex) {
     return knex.schema.createTable('users', users => {
-      users.increments();
+      users.uuid('id');
   
       users
         .string('username', 128)
@@ -15,7 +15,7 @@ exports.up = function(knex) {
         
       })
       .createTable('todo', task => {
-        task.increments();
+        task.uuid('id');
         task.string('taskName')
           .notNullable();
         task.string('taskDescription')
@@ -28,7 +28,7 @@ exports.up = function(knex) {
           .defaultTo(false);
       })
       .createTable('user_todo', el => {
-        el.increments();
+        el.uuid('id');
         el.integer('userId')
         .notNullable()
         .references('id').inTable('users')

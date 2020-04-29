@@ -8,11 +8,13 @@ const Users = require('../users/users-model.js');
 // for endpoints beginning with /api/auth
 router.post('/register', (req, res) => {
   let user = req.body;
+  console.log("req.body for register ", user);
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
 
   Users.add(user)
     .then(saved => {
+      console.log("add user saved = ", saved);
       res.status(201).json(saved);
     })
     .catch(error => {
