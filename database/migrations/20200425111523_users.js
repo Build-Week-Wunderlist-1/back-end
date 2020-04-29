@@ -1,6 +1,6 @@
 exports.up = function(knex) {
     return knex.schema.createTable('users', users => {
-      users.uuid('id');
+      users.increments();
   
       users
         .string('username', 128)
@@ -15,20 +15,22 @@ exports.up = function(knex) {
         
       })
       .createTable('todo', task => {
-        task.uuid('id');
+        task.increments();
         task.string('taskName')
           .notNullable();
         task.string('taskDescription')
           .notNullable();
         task.integer('sortField')
           .defaultTo(1); 
-        task.timestamp('date')
+        task.timestamp('creationDate')
           .defaultTo(knex.fn.now());
+        task.timestamp('modifiedDate')
+          .defaultTo(knex.fn.now());  
         task.boolean('completed')
           .defaultTo(false);
       })
       .createTable('user_todo', el => {
-        el.uuid('id');
+        el.increments();
         el.integer('userId')
         .notNullable()
         .references('id').inTable('users')
