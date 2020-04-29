@@ -9,6 +9,7 @@ exports.seed = function (knex) {
         taskDescription: 'Win WW1 on Italian front',
         sortField: 1,
         completed: false,
+        creationDate: '1/8/1992',
       },
       {
         id: 2,
@@ -16,6 +17,7 @@ exports.seed = function (knex) {
         taskDescription: 'Travel down a big river',
         sortField: 2,
         completed: false,
+        creationDate: '1/8/1993',
       },
       {
         id: 3,
@@ -23,6 +25,7 @@ exports.seed = function (knex) {
         taskDescription: 'Spend that money',
         sortField: 3,
         completed: false,
+        creationDate: '1/8/1994',
       },
     ]);
   });
