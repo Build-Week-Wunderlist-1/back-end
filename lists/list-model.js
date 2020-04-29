@@ -21,8 +21,8 @@ function find() {
       'todo.id as todo_id',
       'todo.sortField',
       'todo.taskDescription',
-      'todo.date',
       'todo.creationDate',
+      'todo.modifiedDate',
       'todo.completed'
     )
     .join('todo', 'user_todo.listId', '=', 'todo.id')
@@ -40,8 +40,8 @@ function findBy(filter) {
       'todo.id as todo_id',
       'todo.sortField',
       'todo.taskDescription',
-      'todo.date',
       'todo.creationDate',
+      'todo.modifiedDate',
       'todo.completed'
     )
     .join('todo', 'user_todo.listId', '=', 'todo.id')

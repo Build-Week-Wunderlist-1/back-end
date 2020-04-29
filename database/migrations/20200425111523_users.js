@@ -12,8 +12,8 @@ exports.up = function (knex) {
       task.string('taskName').notNullable();
       task.string('taskDescription').notNullable();
       task.integer('sortField').defaultTo(1);
-      task.timestamp('date').defaultTo(knex.fn.now());
-      task.date('creationDate');
+      task.timestamp('creationDate').defaultTo(knex.fn.now());
+      task.timestamp('modifiedDate').defaultTo(knex.fn.now());
       task.boolean('completed').defaultTo(false);
     })
     .createTable('user_todo', (el) => {
