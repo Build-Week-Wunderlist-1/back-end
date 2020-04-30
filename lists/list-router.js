@@ -17,9 +17,9 @@ router.get('/:id', (req, res) => {
 
   Lists.findBy({ userId: paramsId })
     .then((lists) => {
-      res.json(lists);
+      res.status(200).json(lists);
     })
-    .catch((err) => res.json(err));
+    .catch((err) => res.status(500).json(err));
 });
 
 router.post('/:id', (req, res) => {

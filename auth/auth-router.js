@@ -13,11 +13,11 @@ router.post('/register', (req, res) => {
 
   Users.add(user)
     .then((saved) => {
-      console.log(saved);
+      // console.log(saved);
       res.status(201).json({ data: saved });
     })
     .catch((error) => {
-      console.log('Register error', error);
+      // console.log('Register error', error);
       res.status(500).json({ errorMessage: error.message });
     });
 });
@@ -29,7 +29,7 @@ router.post('/login', (req, res) => {
     .then((user) => {
       if (user && bcrypt.compareSync(password, user.password)) {
         // produce a token
-        console.log('User = ', user);
+        // console.log('User = ', user);
         const token = generateToken(user);
         // send the token to the client
         res.status(200).json({
