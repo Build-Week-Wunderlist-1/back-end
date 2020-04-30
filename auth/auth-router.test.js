@@ -52,7 +52,7 @@ describe('auth-router', function(){
             await db('users').truncate();
         });
 
-        it('should return 20 ok', async function(){
+        it('should return 200 ok', async function(){
 
             await request(server)
             .post('/api/auth/register')
@@ -66,6 +66,23 @@ describe('auth-router', function(){
             .send({username, password})
             .then(res => {
                 expect(res.status).toBe(200);
+            }); 
+        });
+
+        it('should return a token', async function(){
+
+            await request(server)
+            .post('/api/auth/register')
+            .send({username, email, password})
+            .then(res => {
+                expect(res.body.username).toBe('Bob');
+            }); 
+
+            await request(server)
+            .post('/api/auth/login')
+            .send({username, password})
+            .then(res => {
+                expect(res.body.token).toBeTruthy();
             }); 
         });
     });
