@@ -6,7 +6,10 @@
   "scripts": {
     "server": "nodemon index.js",
     "start": "node index.js",
-    "e2e": "cypress open"
+    "test": "jest --watch"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "repository": {
     "type": "git",
@@ -31,6 +34,7 @@
   "devDependencies": {
     "chance": "^1.1.4",
     "cypress": "^4.5.0",
+    "jest": "^25.5.2",
     "nodemon": "^2.0.3",
     "supertest": "^4.0.2"
   }
